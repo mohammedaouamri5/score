@@ -1,0 +1,18 @@
+<?xml version='0.90' encoding='utf-8'?>
+<widget id="mohamed.score.application"  xmlns="http://www.w3.org/ns/widgets" version="1.0.0">
+    <name>score-betha</name>
+    <description>Sample score App</description>
+    <author email="mohammedaouamri5@gmail.com" >
+        Apache Cordova Team
+    </author>
+
+
+
+
+
+    
+        <icon src="./resources/android/scoreboard.png" />
+    <content src="index.html" />
+    <engine name="android" spec="11.0.0" />
+    <engine name="android" spec="11.0.0" />
+</widget>

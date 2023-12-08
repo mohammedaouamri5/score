@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Two-Column Vertical Layout with Modal</title>
+</head>
+
+<body style="margin: 0px;">
+    <style>
+        
+        .two-column-container {
+            display: flex;
+            flex-direction: row;
+            height: 100vh;
+        }
+    
+        .column {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            display: flex;
+            flex-direction:column;
+            justify-content: center;
+            align-items: center;
+        }
+    
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        } 
+        .button {
+            margin: 5px;
+            width: 50px;
+            height: 50px;
+            border-radius: 20px;
+            background-color:rgb(255, 255, 255);
+            color: rgb(0, 0, 0);
+            border: 0;
+            cursor: pointer;
+            position: relative;
+            display: flex;
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+        }
+    
+        #SCORE-RED {
+            width: 100px;
+            height: 100px;
+            font-size: xx-large;
+            border-spacing: 10px;  
+            box-shadow: 0  0  20px 10px #000000  ;  
+            border-radius: 10px;  
+            
+        }
+        #SCORE-BLUE {
+            width: 100px;
+            height: 100px;
+            box-shadow: 0  0  20px 10px #000000  ;  
+            font-size: xx-large;
+        } 
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 0, 255, 0.287);
+            justify-content: center;
+            align-items: center;
+            z-index: 1;
+        } 
+        .modal-content {
+            background-color:  bisque;
+            box-shadow: 0  0  20px 10px #000000  ; 
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        } 
+        /* Center the text in the modal */
+        .message {
+            text-align: center;
+        }
+    </style>
+
+    <div class="two-column-container">
+        <div class="column"   : style="background-color: #ff0000; border: 0; " >
+            <div class="button-container" >
+                <button id="button1" class="button"   onclick="ADDRED()">UP</button>
+                <button id="SCORE-RED" class="button" onclick="showModal(1)">0</button>
+                <button id="button3" class="button"onclick="REMOVERED()">DOWN</button>
+            </div>
+        </div>
+        <div class="column"  : style="background-color: #0000ff; border: 0;" >
+            <div class="button-container" >
+                <button id="button4" class="button" onclick="ADDBLUE()"   >UP</button>
+                <button id="SCORE-BLUE" class="button" onclick="showModal(0)">0</button>
+                <button id="button6" class="button" onclick="REMOVEBLUE()">DOWN</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class Player {
+           constructor(COLER, SCORE) {
+               this.SCORE = SCORE;
+               this.name = COLER; 
+           }
+            
+           Add(int) {
+               this.SCORE  = parseInt(this.SCORE) +parseInt( int);
+           }
+           Remove(int){
+               this.SCORE  = parseInt(this.SCORE) - parseInt( int);
+           }
+           Set(int){
+               this.SCORE  =  parseInt( int);
+           }
+           Get(){return this.SCORE}
+       }
+
+
+       function ADD( ) {
+           player.Add( parseInt(document.getElementById("display").innerText) );
+           document.getElementById('player-score').innerHTML = "You score know is : " + player.SCORE;
+           C() 
+           
+       }
+       function REMOVE(  ){
+           player.Remove(  document.getElementById("display").innerText );
+           document.getElementById('player-score').innerHTML = "You score know is : " + player.SCORE;
+           C() 
+           
+       }
+       function SET(  ) {
+           player.Set(document.getElementById("display").innerText  );
+           document.getElementById('player-score').innerHTML = "You score know is : " + player.SCORE;
+           C(); 
+           closeModal();
+           
+       }
+       
+       
+       function ADDBLUE( ) {
+           BLUE.Add( "1" );
+           document.getElementById('SCORE-BLUE').innerHTML = BLUE.SCORE;            
+       }
+       function REMOVEBLUE(  ){
+           BLUE.Remove( "1" );
+           document.getElementById('SCORE-BLUE').innerHTML = BLUE.SCORE;
+       }
+       
+       function ADDRED( ) {
+           RED.Add( "1" ); 
+           document.getElementById('SCORE-RED').innerHTML = RED.SCORE;
+       }
+       function REMOVERED(  ){
+           RED.Remove( "1" );
+           document.getElementById('SCORE-RED').innerHTML = RED.SCORE;
+       }
+       
+
+       
+       let BLUE = new Player("#ff0000", 0)
+       let RED = new Player("#0000ff", 0)
+       let player;
+       
+       // Function to display the modal
+       function showModal(WoW) {
+
+           if (WoW == 0) {
+               
+               player =   BLUE 
+
+           } else {
+               
+               player =  RED 
+           }
+           
+           var modal = document.getElementById('myModal');
+           modal.style.display = 'flex';
+          
+           document.getElementById('player-score').innerHTML = "You score now is : " + player.SCORE;
+           C();
+           
+       }
+
+       // Function to close the modal
+       function closeModal() {
+           var modal = document.getElementById('myModal');
+           modal.style.display = 'none';
+           document.getElementById('SCORE-RED').innerHTML = RED.SCORE;
+           document.getElementById('SCORE-BLUE').innerHTML = BLUE.SCORE;
+       }
+   </script>
+
+
+    <!-- The Modal -->
+    <style>  
+        
+        td {
+            text-align: center;
+            vertical-align: middle;
+        } 
+        table {  
+            
+            background-color: brown;  
+            border: 1px solid black;  
+            table-layout: fixed;  
+            border: 1px solid black;  
+            
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);  
+            border-radius: 10px;  
+        }  
+        button{  
+            border-radius: 10px;
+            padding: 16px;
+            border-radius: 50px;  
+           
+            display: flex;
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+        }  
+        button:hover{  
+            background-color: black;  
+            color: rgb(255, 255, 255);   
+              
+        }  
+        button:active{  
+            transform: scale(0.98);  
+            box-shadow:3px 2px 22px 1px rgba(0, 0, 0, 0.24);  
+        }  
+        #player-score{
+            background-color: #00000000;
+            color: rgb(13, 21, 240);
+            box-shadow: 0 -12px -16px 0 rgba(0, 187, 22, 0.24), 0 17px 50px 0 rgba(249, 11, 11, 0.19);  
+            border-radius: 30px;  
+            height:30px;  
+            z-index: 300;
+            display: flex;
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+        }
+        #display{  
+            width:100%;  
+            height:40px;  
+            margin: 10px 0px 0px 0px;  
+            box-shadow: 0 12px 16px 0 rgba(0, 8, 255, 0.24), 0 17px 50px 0 rgba(186, 97, 97, 0.19);  
+            border-radius: 50px;  
+            
+            
+            display: flex;
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+            background-color: #ccc;
+        }  
+        #display:hover{  
+            background-color: black;  
+            color: white;  
+        }  
+        body{  
+            background-color: black;  
+        }  
+        h1{  
+            color: rgb(255, 255, 255);  
+        }  
+        body:hover{  
+            background-color: floralwhite;  
+        }  
+         body:hover h1{  
+            color: black;  
+              
+        }  
+
+        #bruh{
+            position: relative;left: 50%; transform: translate( -50%,  0%);
+        }
+ 
+
+    </style>  
+    
+    
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <div class="message">
+                <table>  
+                    <tr>  <div id = "display" >   </div>  </tr>  
+                    <tr>  <div  id="player-score"> </div> </tr>  
+                    
+                   
+                    <tr>
+                        <td> <button id="K-Bord" onclick = B()      : style="height: 45px; width: 45px;">B</button></td>  
+                        <td> <button id="K-Bord" onclick = 'fun(7)' : style="height: 45px; width: 45px;" >7</button></td>  
+                        <td> <button id="K-Bord" onclick = 'fun(8)' : style="height: 45px; width: 45px;" >8</button></td>  
+                        <td> <button id="K-Bord" onclick = 'fun(9)' : style="height: 45px; width: 45px;" >9</button></td>  
+                        <td> <button id="K-Bord" onclick = 'ADD( )': style="height: 45px; position: relative;left: 50%; transform: translate( -50%,  0%); ">ADD</button></td>  
+                    </tr>  
+                    <tr>
+                        <td> <button onclick = C()     : style="height: 45px; width: 45px;">C</button></td>  
+                        <td> <button onclick = 'fun(6)': style="height: 45px; width: 45px;">6</button></td>  
+                        <td> <button onclick = 'fun(5)': style="height: 45px; width: 45px;">5</button></td>  
+                        <td> <button onclick = 'fun(4)': style="height: 45px; width: 45px;">4</button></td>  
+                        <td> <button onclick = 'REMOVE( )': style="height: 45px; top: 50%; left: 0%;  ">REMOVE</button></td>  
+                    </tr>  
+                    <tr>
+                        <td> <button onclick= "fun(0)"  : style="height: 45px; width: 45px;">0</button> </td>  
+                        <td> <button onclick = 'fun(1)' : style="height: 45px; width: 45px;">1</button></td>  
+                        <td> <button onclick = 'fun(2)' : style="height: 45px; width: 45px;">2</button></td>  
+                        <td> <button onclick = 'fun(3)' : style="height: 45px; width: 45px;">3</button></td>  
+                        <td> <button onclick = 'SET( )' : style="height: 45px;   position: relative;left: 50%; transform: translate( -50%,  0%); "> SET</button></td>  
+                    </tr>  
+                </table>  
+            </div>
+            <button onclick="closeModal()"  id="bruh" >Close</button>    
+            
+        </div>
+    </div>
+    <script type = text/javascript>  
+        function fun(a)  
+        {  
+            document.getElementById("display").innerHTML  +=a;  
+        }  
+        function C()  
+        {  
+            document.getElementById("display").innerHTML  = " ";  
+            fun(0)  
+        }  
+        function B()  
+        {  
+            var y = document.getElementById("display").innerHTML ;  
+            document.getElementById("display").innerHTML  = Math.floor( parseInt(  document.getElementById("display").innerHTML )  / 10)
+            
+            
+            y.slice(0, y.length-1);  
+        }  
+        
+    </script>  
+    
+    
+ 
+
+
+  
+</body>
+
+</html>
